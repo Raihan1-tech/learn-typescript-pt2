@@ -1,5 +1,5 @@
 import { Transform, Type } from 'class-transformer';
-import { IsIn, IsInt, IsNumber, IsOptional, Max, Min } from 'class-validator';
+import { IsIn, IsInt, IsNumber, IsOptional, IsPositive, Max, Min } from 'class-validator';
 
 export class ParamDTO {
   @Type(() => Number)
@@ -25,7 +25,7 @@ export class LoanDTO {
 
   @Type(() => Number)
   @IsNumber()
-  @Min(0)
+  @IsPositive()
   @Max(50)
   annualInterestRate: number;
 }

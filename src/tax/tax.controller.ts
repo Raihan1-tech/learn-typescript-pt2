@@ -7,7 +7,7 @@ export class TaxController {
   constructor(private readonly taxService: TaxService) {}
 
   @Get()
-  async CalculateTax(@Query() dto: dto) {
+  CalculateTax(@Query() dto: dto) {
     return this.taxService.CalculateTax(dto)
   }
 }

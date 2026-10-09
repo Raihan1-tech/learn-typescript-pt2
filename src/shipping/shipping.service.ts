@@ -4,16 +4,16 @@ import { ParamsDTO, QueryDTO, ShippingDTO } from './dto.js';
 @Injectable()
 export class ShippingService {
 	calculate(params: ParamsDTO, query: QueryDTO, dto: ShippingDTO) {
-		const baseFares: Record<string, number> = {
+		const tujuan : Record<string, number> = {
 			jakarta: 9000,
 			bandung: 12000,
 			surabaya: 15000,
 			medan: 18000,
 			denpasar: 20000,
 		};
-		const baseFare = baseFares[params.city];
+		const tujuans = tujuan[params.city];
 
-		if (baseFare === undefined) {
+		if (tujuans === undefined) {
 			throw new NotFoundException({
 				success: false,
 				message: `City '${params.city}' is not supported`,
@@ -21,13 +21,13 @@ export class ShippingService {
 			});
 		}
 
-		const volumetricKg = dto.dimension.lengthCm
+		const volume = dto.dimension.lengthCm
 			* dto.dimension.widthCm
 			* dto.dimension.heightCm / 5000;
-		const chargeableKg = Math.max(dto.weightKg, volumetricKg);
-		const weightExtra = Math.max(0, Math.ceil(chargeableKg - 1)) * 2000;
-		const expressFee = query.express ? (baseFare + weightExtra) * 0.5 : 0;
-		const insuranceFee = query.insurance ? chargeableKg * 1000 : 0;
+		const chargeable = Math.max(dto.weightKg, volume);
+		const weightExtra = Math.max(0, Math.ceil(chargeable - 1)) * 2000;
+		const expressFee = query.express ? (tujuans + weightExtra) * 0.5 : 0;
+		const insuranceFee = query.insurance ? chargeable * 1000 : 0;
 
 		return {
 			success: true,
@@ -37,12 +37,12 @@ export class ShippingService {
 				express: query.express,
 				insurance: query.insurance,
 				weightKg: dto.weightKg,
-				volumetricKg,
-				chargeableKg,
-				baseFare,
+				volume,
+				chargeable,
+				tujuans,
 				expressFee,
 				insuranceFee,
-				total: baseFare + weightExtra + expressFee + insuranceFee,
+				total: tujuans + weightExtra + expressFee + insuranceFee,
 			},
 		};
 	}

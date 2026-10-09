@@ -1,14 +1,14 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { ElectricityDTO } from './dto.js';
+import { ElecDTO } from './dto.js';
 
 @Injectable()
 export class ElectricityService {
-	calculate(dto: ElectricityDTO) {
+	calculate(dto: ElecDTO) {
 		if (dto.meter.currentKwh <= dto.meter.previousKwh) {
 			throw new BadRequestException({
 				success: false,
-				message: 'currentKwh must be greater than previousKwh',
-				errors: [{ field: 'meter.currentKwh', message: 'currentKwh must be greater than previousKwh' }],
+				message: 'current Kwh must be greater than previous Kwh',
+				errors: [{ field: 'meter.currentKwh', message: 'current Kwh must be greater than previous Kwh' }],
 			});
 		}
 

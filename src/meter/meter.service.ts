@@ -9,9 +9,9 @@ export class MeterService {
             message: "Lenght Converted",
             data: {
                 meters: dto.meters,
-                kilometers: dto.meters / 1000,
-                centimeters: dto.meters * 100,
-                miles: dto.meters / 1609
+                KM: dto.meters / 1000,
+                CM: dto.meters * 100,
+                Miles: dto.meters / 1609
             }
         }
     }

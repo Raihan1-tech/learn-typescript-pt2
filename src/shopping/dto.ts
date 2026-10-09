@@ -1,5 +1,5 @@
 import { Transform, Type } from 'class-transformer';
-import { ArrayMaxSize, ArrayMinSize, IsArray, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Min, ValidateNested } from 'class-validator';
+import { ArrayMaxSize, ArrayMinSize, IsArray, IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Length, Min, ValidateNested } from 'class-validator';
 
 export class ItemDTO {
   @IsString()
@@ -8,7 +8,7 @@ export class ItemDTO {
   name: string;
 
   @IsNumber()
-  @Min(0)
+  @IsPositive()
   price: number;
 
   @IsInt()

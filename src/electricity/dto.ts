@@ -31,7 +31,7 @@ export class RatesDTO {
   taxRate: number = 11;
 }
 
-export class ElectricityDTO {
+export class ElecDTO {
   @IsString()
   @IsNotEmpty()
   @Length(3, 80)

@@ -1,16 +1,16 @@
 import { Transform } from "class-transformer";
-import { IsNotEmpty, IsNumber, Max, Min, IsOptional, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, Max, IsOptional, IsString, IsPositive } from "class-validator";
 
 
 export class dto {
     @IsNotEmpty()
     @IsNumber()
-    @Min(0)
+    @IsPositive()
     amount: number
 
     @IsNotEmpty()
     @IsNumber()
-    @Min(0)
+    @IsPositive()
     @Max(100)
     rate: number
 
